@@ -23,10 +23,11 @@ import {
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
+import CreateNewBoardDialog from "./CreateNewBoardDialog";
 
 export function AppSidebar() {
   const path = usePathname();
-  const {user} = useUser()
+  const { user } = useUser();
   return (
     <Sidebar>
       <SidebarHeader className="p-4">
@@ -37,7 +38,7 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <Button>+ Create New Board</Button>
+          <CreateNewBoardDialog />
         </SidebarGroup>
         <SidebarGroup>
           <SidebarGroupLabel>My Boards</SidebarGroupLabel>
@@ -74,7 +75,7 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <Button>+ Create New Board</Button>
+        <CreateNewBoardDialog/>
         <div className="p-4 my-3 border rounded-md">
           <h2 className="text-sm flex justify-between mb-1">
             2 files created <span>total 3</span>
@@ -82,9 +83,19 @@ export function AppSidebar() {
           <Progress value={66} className="mt-2 h2"></Progress>
         </div>
         <div className="flex items-center gap-2 bg-background border rounded-md p-1">
-          {user?.imageUrl && <Image src={user?.imageUrl} alt="User Image" width={40} height={40} className="rounded-full"/>}
+          {user?.imageUrl && (
+            <Image
+              src={user?.imageUrl}
+              alt="User Image"
+              width={40}
+              height={40}
+              className="rounded-full"
+            />
+          )}
           <div>
-            <h2>{user?.firstName} {user?.lastName}</h2>
+            <h2>
+              {user?.firstName} {user?.lastName}
+            </h2>
             <h3 className="text-sm text-muted-foreground">Admin</h3>
           </div>
         </div>
