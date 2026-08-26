@@ -52,7 +52,7 @@ const CreateNewBoardDialog = () => {
 
     setLoading(false)
     setDialog(false)
-    route.push('/workspace' + projectId)
+    route.push(`/workspace/${projectId}`)
   };
 
   return (
