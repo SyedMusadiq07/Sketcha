@@ -10,8 +10,7 @@ export async function POST(req: NextRequest) {
     if(user)
     {
         const userData=await db.select().from(users)
-        //@ts-ignore
-        .where(eq(user.primaryEmailAddress?.emailAddress,users.email))
+        .where(eq(users.email, user.primaryEmailAddress?.emailAddress ?? ''))
 
         if(userData?.length > 0) {
             return NextResponse.json(userData[0])
