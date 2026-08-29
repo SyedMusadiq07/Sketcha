@@ -15,6 +15,7 @@ import {
   MousePointer,
   MousePointer2,
   Pencil,
+  Sparkles,
   Square,
   Timer,
   Type,
@@ -27,6 +28,7 @@ import { Button } from "@/components/ui/button";
 import { ExcalidrawImperativeAPI } from "@excalidraw/excalidraw/types";
 import FloatingProperties from "./FloatingProperties";
 import { vector } from "drizzle-orm/pg-core";
+import AIFloatingSidebar from "./AIFloatingSidebar";
 
 const tools = [
   {
@@ -98,7 +100,7 @@ const Whiteboard = () => {
   const [activeTool, setActiveTool] = useState("selection");
   const [selectedElement, setSelectedElement] = useState<any>(null);
   const [canvasState, setCanvasState] = useState<any>(null);
-
+  const [showAiSidebar, setShowAiSidebar] = useState<boolean>(false);
   const handleCanvasChange = (
     elements: readonly any[],
     appState: any,
@@ -322,6 +324,13 @@ const Whiteboard = () => {
         onSendToBack={() => handleBringFrontBack("back")}
         onLock={() => handleOnLock()}
       />
+      <div className="absolute bottom-5 right-15 z-50">
+        <Button size={'lg'} onClick={() => setShowAiSidebar(!showAiSidebar)}>
+          <Sparkles/> AI
+        </Button>
+      </div>
+
+      {showAiSidebar && <AIFloatingSidebar excalidrawApi={excalidrawAPI}/>}
     </div>
   );
 };
